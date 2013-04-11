@@ -24,30 +24,44 @@ body {
 	text-align: center;
 	clear: both;
 }
+#image-upload.drag {
+	background-color: #9f9;
+}
 
 #image-list {
 	margin: 0;
 	padding: 0;
 }
 #image-list li {
+	position: relative;
 	float: left;
 	margin: 10px;
 	padding: 10px;
-	width: 300px;
-	height: 236px;
-	border: 1px solid #bbb;
+	width: 202px;
+	height: 189px;
+	border: 1px solid #aaa;
 	list-style: none;
 	box-shadow: 1px 1px 3px #ddd;
 	text-align: center;
 }
+#image-list li:hover {
+	background-color: #ff9;
+	cursor: pointer;
+}
+#image-list li:active {
+	background-color: #f99;
+}
 #image-list img {
-	max-height: 200px;
-	max-width: 300px;
+	max-width: 200px;
+	max-height: 160px;
 	border: 1px solid #bbb;
 }
 #image-list span.name {
 	display: block;
-	margin-top: 5px;
-	font-size: 1.5em;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: 202px;
+	font-size: 1.1em;
 	font-weight: bold;
 }

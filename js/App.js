@@ -1,10 +1,12 @@
 
 var App = Backbone.View.extend({
 	template: new Template('body'),
+	upload: '#image-upload',
 	
 	events: {
 		'dragover': 'dragOverFiles',
-		'drop': 'dropFiles'
+		'drop': 'dropFiles',
+		'dragleave': 'dragLeave'
 	},
 	
 	initialize: function () {
@@ -26,12 +28,14 @@ var App = Backbone.View.extend({
 		event.preventDefault();
 		event.stopPropagation();
 		event.originalEvent.dataTransfer.dropEffect = 'copy';
+		$(this.upload).addClass('drag');
 	},
 	
 	// read dropped images
 	dropFiles: function (event) {
 		event.preventDefault();
 		event.stopPropagation();
+		$(this.upload).removeClass('drag');
 		var files = _.chain(event.originalEvent.dataTransfer.files)
 			.filter(function (file) {
 				return file.type.match(/image\/.+/);
@@ -52,6 +56,10 @@ var App = Backbone.View.extend({
 				}, this);
 				reader.readAsDataURL(file);
 			}, this);
+	},
+	
+	dragLeave: function (event) {
+		$(this.upload).removeClass('drag');
 	}
 
 });
