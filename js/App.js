@@ -32,8 +32,14 @@ var App = Backbone.View.extend({
 			.each(function (file) {
 				var reader = new FileReader();
 				reader.onload = _.bind(function (e) {
+					var name = file.name
+						.replace(/\.\w+$/, '')
+						.replace(/[ _\-]+/g, ' ')
+						.replace(/\w\S*/g, function (w) {
+							return w.charAt(0).toUpperCase() + w.substr(1);
+						});
 					this.images.add(new Image({
-						'name': '',
+						'name': name,
 						'src': e.target.result
 					}));
 				}, this);

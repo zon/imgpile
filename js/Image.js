@@ -15,7 +15,14 @@ var ImageCollectionView = Backbone.View.extend({
 	
 	render: function () {
 		this.$el.html(this.collection.map(function (image) {
-			return '<li><img src="'+ image.get('src') +'" /></li>';
+			var json = image.toJSON();
+			return [
+				'<li><img src="',
+				json.src,
+				'" /><span class="name">',
+				json.name,
+				'</li>'
+			].join('');
 		}).join(''));
 		return this;
 	}
