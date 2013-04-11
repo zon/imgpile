@@ -7,10 +7,9 @@ var App = Backbone.View.extend({
 	},
 	
 	initialize: function () {
+		this.images = new ImageCollection();
+		this.listenTo(this.images, 'add', this.addImage);
 		this.setElement($('body'));
-		
-		console.log('INIT');
-		
 	},
 	
 	// warn browser files should drop
@@ -24,24 +23,24 @@ var App = Backbone.View.extend({
 	dropFiles: function (event) {
 		event.preventDefault();
 		event.stopPropagation();
-		
-		// read dropped images
 		var files = _.chain(event.originalEvent.dataTransfer.files)
 			.filter(function (file) {
 				return file.type.match(/image\/.+/);
 			})
-			.map(function (file) {
+			.each(function (file) {
 				var reader = new FileReader();
-				reader.onload = (function (f) {
-					
-				})(file);
-				
-				return file.name;
-				
-			})
-			.value();
-		
-		console.log(files);
+				reader.onload = _.bind(function (e) {
+					this.images.add(new Image({
+						'name': '',
+						'src': e.target.result
+					}));
+				}, this);
+				reader.readAsDataURL(file);
+			}, this);
+	},
+	
+	addImage: function (model) {
+		console.log('ADD IMAGE', model.toJSON());
 	}
 
 });
