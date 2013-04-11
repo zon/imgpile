@@ -20,6 +20,7 @@ var App = Backbone.View.extend({
 	render: function () {
 		this.$el.html(this.template.render());
 		this.images.setElement('#image-list');
+		this.images.render();
 		return this;
 	},
 	
