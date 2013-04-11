@@ -2,8 +2,8 @@
 var App = Backbone.View.extend({
 	
 	events: {
-		'dragover #image-upload': 'dragOverFiles',
-		'drop #image-upload': 'dropFiles'
+		'dragover': 'dragOverFiles',
+		'drop': 'dropFiles'
 	},
 	
 	initialize: function () {
