@@ -8,7 +8,9 @@ var App = Backbone.View.extend({
 	
 	initialize: function () {
 		this.images = new ImageCollection();
-		this.listenTo(this.images, 'add', this.addImage);
+		this.children = {
+			images: new ImageCollectionView({collection: this.images})
+		};
 		this.setElement($('body'));
 	},
 	
@@ -37,10 +39,6 @@ var App = Backbone.View.extend({
 				}, this);
 				reader.readAsDataURL(file);
 			}, this);
-	},
-	
-	addImage: function (model) {
-		console.log('ADD IMAGE', model.toJSON());
 	}
 
 });

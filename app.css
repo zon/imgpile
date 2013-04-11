@@ -1,7 +1,43 @@
-#image-upload {
-	padding: 50px;
-	height: 100px;
+body {
+	margin: 0;
+	background-color: #999;
+}
+
+#image-app {
+	background-color: #fff;
+}
+
+#image-heading {
+	margin: 0;
+	padding: 10px 20px;
 	background-color: #eee;
+	box-shadow: inset 1px 1px 3px #999;
+}
+
+#image-upload {
+	margin: 20px 0 0;
+	padding: 60px 20px;
+	background-color: #eee;
+	box-shadow: inset 1px 1px 3px #999;
 	font-weight: bold;
 	text-align: center;
+	clear: both;
+}
+
+#image-list {
+	margin: 0;
+	padding: 0;
+}
+#image-list li {
+	float: left;
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #bbb;
+	list-style: none;
+	box-shadow: 1px 1px 3px #ddd;
+}
+#image-list img {
+	max-height: 200px;
+	max-width: 300px;
+	border: 1px solid #bbb;
 }
