@@ -1,5 +1,6 @@
 
 var App = Backbone.View.extend({
+	template: new Template('body'),
 	
 	events: {
 		'dragover': 'dragOverFiles',
@@ -7,11 +8,17 @@ var App = Backbone.View.extend({
 	},
 	
 	initialize: function () {
-		this.images = new ImageCollection();
-		this.children = {
-			images: new ImageCollectionView({collection: this.images})
-		};
+		this.images = new ImageCollectionView({
+			collection: new ImageCollection()
+		});
 		this.setElement($('body'));
+		this.render();
+	},
+	
+	render: function () {
+		this.$el.html(this.template.render());
+		this.images.setElement('#image-list');
+		return this;
 	},
 	
 	// warn browser files should drop
@@ -38,7 +45,7 @@ var App = Backbone.View.extend({
 						.replace(/\w\S*/g, function (w) {
 							return w.charAt(0).toUpperCase() + w.substr(1);
 						});
-					this.images.add(new Image({
+					this.images.collection.add(new Image({
 						'name': name,
 						'src': e.target.result
 					}));

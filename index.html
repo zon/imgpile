@@ -4,6 +4,22 @@
 		<title>ImgPile</title>
 		<link rel="stylesheet" type="text/css" href="app.css">
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script id="body-template" type="text/template">
+			<div id="image-app">
+				<h1 id="image-heading">ImgPile</h1>
+				<ul id="image-list"></ul>
+				<h2 id="image-upload">Drop new images here</h2>
+			</div>
+		</script>
+		<script id="image-list-item-template" type="text/template">
+			<li>
+				<img src="{{src}}" />
+				<span class="name">{{name}}</span>
+				{{#description}}
+				<span class="description">{{description}}</span>
+				{{/description}}
+			</li>
+		</script>
 		<script src="js/lib/mustache.js"></script>
 		<script src="js/lib/underscore.js"></script>
 		<script src="js/lib/backbone.js"></script>
@@ -12,10 +28,5 @@
 		<script src="js/App.js"></script>
 	</head>
 	<body>
-		<div id="image-app">
-			<h1 id="image-heading">ImgPile</h1>
-			<ul id="image-list"></ul>
-			<h2 id="image-upload">Drop new images here</h2>
-		</div>
 	</body>
 </html>
