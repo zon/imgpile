@@ -65,3 +65,65 @@ body {
 	font-size: 1.1em;
 	font-weight: bold;
 }
+
+#full-view {
+	position: relative;
+	margin: 0;
+	padding: 10px;
+	padding-top: 42px;
+	background-color: #fff;
+	text-align: center;
+}
+
+#full-view .nav {
+	position: absolute;
+	top: 10px;
+	margin: 0;
+	padding-left: 32px;
+	padding-right: 12px;
+	height: 32px;
+	border-radius: 16px;
+	background-repeat: no-repeat;
+	background-position: 4px 4px;
+	line-height: 32px;
+}
+#full-view .nav:hover {
+	background-color: #ff9;
+	cursor: pointer;
+}
+#full-view .nav:active {
+	background-color: #f99;
+}
+#full-back {
+	left: 10px;
+	background-image: url('img/back-icon.png');
+}
+#full-delete {
+	right: 10px;
+	background-image: url('img/delete-icon.png');
+}
+
+#full-view img {
+	margin: 10px;
+	max-width: 700px;
+}
+
+#full-view .field {
+	clear: both;
+	margin: 0 0 10px;
+}
+#full-view .field input[type=text] {
+	margin: 0;
+	padding: 5px 10px;
+	border: 1px solid #ccc;
+	width: 700px;
+}
+#full-view .field input[type=text].empty {
+	font-style: italic;
+	color: #aaa;
+}
+
+#full-view .field input[name=name] {
+	font-size: 1.5em;
+	font-weight: bold;
+}

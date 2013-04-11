@@ -13,8 +13,8 @@ var App = Backbone.View.extend({
 		this.images = new ImageCollectionView({
 			collection: new ImageCollection()
 		});
+		this.full = new FullView();
 		this.setElement($('body'));
-		this.render();
 	},
 	
 	render: function () {
@@ -65,4 +65,8 @@ var App = Backbone.View.extend({
 });
 
 // start the app
-$(function () {new App()});
+var app = undefined;
+$(function () {
+	app = new App();
+	app.render();
+});

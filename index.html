@@ -12,7 +12,7 @@
 			</div>
 		</script>
 		<script id="image-list-item-template" type="text/template">
-			<li>
+			<li id="{{cid}}">
 				<img src="{{src}}" />
 				<span class="name">{{name}}</span>
 				{{#description}}
@@ -20,11 +20,35 @@
 				{{/description}}
 			</li>
 		</script>
+		<script id="full-view-template" type="text/template">
+			<form id="full-view">
+				<p id="full-back" class="nav">Back</p>
+				<p id="full-delete" class="nav">Delete</p>
+				<img src="{{src}}" />
+				<p class="field">
+					{{#name}}
+					<input name="name" type="text" value="{{name}}" />
+					{{/name}}
+					{{^name}}
+					<input class="empty" name="name" type="text" value="Name" />
+					{{/name}}
+				</p>
+				<p class="field">
+					{{#description}}
+					<input name="description" type="text" value="{{description}}" />
+					{{/description}}
+					{{^description}}
+					<input class="empty" name="description" type="text" value="Description" />
+					{{/description}}
+				</p>
+			</form>
+		</script>
 		<script src="js/lib/mustache.js"></script>
 		<script src="js/lib/underscore.js"></script>
 		<script src="js/lib/backbone.js"></script>
 		<script src="js/Template.js"></script>
 		<script src="js/Image.js"></script>
+		<script src="js/FullView.js"></script>
 		<script src="js/App.js"></script>
 	</head>
 	<body>
