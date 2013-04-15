@@ -1,7 +1,9 @@
-var Image = Backbone.Model.extend({});
+var Image = Backbone.Model.extend({
+    url: '/api/image'
+});
 
 var ImageCollection = Backbone.Collection.extend({
-	model: Image
+    model: Image
 });
 
 var ImageCollectionView = Backbone.View.extend({
@@ -12,7 +14,7 @@ var ImageCollectionView = Backbone.View.extend({
 	},
 	
 	initialize: function () {
-		this.listenTo(this.collection, 'add', this.render);
+		this.listenTo(this.collection, 'add', this.addImage);
 		this.listenTo(this.collection, 'change', this.render);
 		this.listenTo(this.collection, 'add', this.render);
 	},
@@ -33,6 +35,10 @@ var ImageCollectionView = Backbone.View.extend({
 		}
 		var item = this.collection.get(target.attr('id'));
 		app.full.showImage(item);
-	}
+	},
+
+    addImage: function (image) {
+        image.save();
+    }
 	
 });

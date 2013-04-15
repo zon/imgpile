@@ -1,5 +1,5 @@
 var FullView = Backbone.View.extend({
-	template: new Template('full-view'),
+    template: new Template('full-view'),
 	
 	events: {
 		'click #full-back': 'back',
@@ -43,6 +43,7 @@ var FullView = Backbone.View.extend({
 		var target = $(event.target);
 		var name = target.attr('name');
 		this.model.set(name, target.val());
+        this.model.save();
 	},
 	
 	render: function () {
