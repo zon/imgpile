@@ -14,7 +14,6 @@ var ImageCollectionView = Backbone.View.extend({
 	},
 	
 	initialize: function () {
-		this.listenTo(this.collection, 'add', this.addImage);
 		this.listenTo(this.collection, 'change', this.render);
 		this.listenTo(this.collection, 'add', this.render);
 	},
@@ -35,13 +34,6 @@ var ImageCollectionView = Backbone.View.extend({
 		}
 		var item = this.collection.get(target.attr('id'));
 		app.full.showImage(item);
-	},
-
-    addImage: function (image) {
-    	var src = image.get('src');
-    	image.unset('src', {silent: true});
-        image.save();
-        image.set('src', src);
-    }
+	}
 	
 });

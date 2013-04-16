@@ -50,9 +50,11 @@ var App = Backbone.View.extend({
 						.replace(/\w\S*/g, function (w) {
 							return w.charAt(0).toUpperCase() + w.substr(1);
 						});
-					this.images.collection.add(new Image({
+					var image = new Image({
 						'name': name, 'src': e.target.result
-					}));
+					});
+					this.images.collection.add(image);
+					image.save();
 				}, this);
 				reader.readAsDataURL(file);
 			}, this);
