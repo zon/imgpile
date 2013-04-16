@@ -1,9 +1,8 @@
-var Image = Backbone.Model.extend({
-    url: '/api/images'
-});
+var Image = Backbone.Model.extend({});
 
 var ImageCollection = Backbone.Collection.extend({
-    model: Image
+    model: Image,
+    url: '/api/images'
 });
 
 var ImageCollectionView = Backbone.View.extend({

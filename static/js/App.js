@@ -17,6 +17,11 @@ var App = Backbone.View.extend({
 		this.setElement($('body'));
 	},
 	
+	start: function () {
+		this.render();
+		this.images.collection.fetch();
+	},
+	
 	render: function () {
 		this.$el.html(this.template.render());
 		this.images.setElement('#image-list');
@@ -70,5 +75,5 @@ var App = Backbone.View.extend({
 var app = undefined;
 $(function () {
 	app = new App();
-	app.render();
+	app.start();
 });
