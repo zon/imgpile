@@ -49,7 +49,7 @@ def images():
 	return json.dumps(images)
 
 # get image
-@app.route("/api/images/<int:image_id>")
+@app.route('/api/images/<int:image_id>', methods = ['GET', 'PUT'])
 def image(image_id):
 	db, cursor = connect_db()
 	cursor.execute(
