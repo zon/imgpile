@@ -1,6 +1,8 @@
 from flask import Flask, request
 import MySQLdb
 import json
+import re
+import base64
 
 DATABASE = 'imgpile'
 UPLOADS_LOCAL = 'static/uploads'
@@ -21,19 +23,26 @@ def images():
 	
 	# create image
 	if request.method == "POST":
+		m = re.match(r'data:image/([^;]+);base64,', request.json['src'])
+		ext = m.group(1)
 		cursor.execute(
-			'INSERT INTO image SET name = %s, path = %s',
-			(request.json['name'], 'fake.png')
+			'INSERT INTO image SET name = %s, extension = %s',
+			(request.json['name'], ext)
 		)
-	db.commit()
+		f = open(
+			'%s/%i.%s' % (app.config['UPLOADS_LOCAL'], db.insert_id(), ext), 'w'
+		)
+		f.write(base64.b64decode(request.json['src'][len(m.group(0)):]))
+		f.close()
+		db.commit()
 	
 	# retrieve images
 	images = []
-	cursor.execute('SELECT id, path, name, description FROM image')
-	for id, path, name, description in cursor:
+	cursor.execute('SELECT id, name, extension, description FROM image')
+	for id, name, extension, description in cursor:
 		images.append({
 			'id': id,
-			'src': app.config['UPLOADS_WEB'] +'/'+ path, 
+			'src': '%s/%i.%s' % (app.config['UPLOADS_LOCAL'], id, extension),
 			'name': name,
 			'description': description
 		})
@@ -44,11 +53,16 @@ def images():
 def image(image_id):
 	db, cursor = connect_db()
 	cursor.execute(
-		'SELECT id, path, name, description FROM image WHERE id = %s',
+		'SELECT id, name, extension, description FROM image WHERE id = %s',
 		(image_id,)
 	)
-	id, path, name, description = cursor.fetchone();
-	image = {'id': id, 'path': path, 'name': name, 'description': description}
+	id, name, extension, description = cursor.fetchone();
+	image = {
+		'id': id,
+		'src': '%s/%i.%s' % (app.config['UPLOADS_LOCAL'], id, extension),
+		'name': name,
+		'description': description
+	}
 	
 	# update image
 	if request.method == "PUT":
