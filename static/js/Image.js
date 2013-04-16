@@ -1,5 +1,5 @@
 var Image = Backbone.Model.extend({
-    url: '/api/image'
+    url: '/api/images'
 });
 
 var ImageCollection = Backbone.Collection.extend({
@@ -38,7 +38,10 @@ var ImageCollectionView = Backbone.View.extend({
 	},
 
     addImage: function (image) {
+    	var src = image.get('src');
+    	image.unset('src', {silent: true});
         image.save();
+        image.set('src', src);
     }
 	
 });

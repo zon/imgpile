@@ -15,15 +15,15 @@ app.debug = True
 def index():
 	return open('static/index.html').read()
 
-@app.route("/api/images")
+@app.route('/api/images', methods = ['GET', 'POST'])
 def images():
 	db, cursor = connect_db()
 	
 	# create image
 	if request.method == "POST":
 		cursor.execute(
-			'INSERT INTO image SET name = "%s", path = "%s"',
-			(request.form['name'], 'fake.png')
+			'INSERT INTO image SET name = %s, path = %s',
+			(request.json['name'], 'fake.png')
 		)
 	db.commit()
 	
@@ -33,7 +33,7 @@ def images():
 	for id, path, name, description in cursor:
 		images.append({
 			'id': id,
-			'src': app.config['UPLOADS_WEB'] + path, 
+			'src': app.config['UPLOADS_WEB'] +'/'+ path, 
 			'name': name,
 			'description': description
 		})
@@ -53,8 +53,8 @@ def image(image_id):
 	# update image
 	if request.method == "PUT":
 		cursor.execute(
-			'UPDATE image SET name = "%s", description = "%s" WHERE id = %s',
-			(request.form['name'], request.form['description'], image_id)
+			'UPDATE image SET name = %s, description = %s WHERE id = %s',
+			(request.json['name'], request.json['description'], image_id)
 		)
 		db.commit()
 		image['name'] = name

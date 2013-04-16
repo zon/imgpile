@@ -51,8 +51,7 @@ var App = Backbone.View.extend({
 							return w.charAt(0).toUpperCase() + w.substr(1);
 						});
 					this.images.collection.add(new Image({
-						'name': name,
-						'src': e.target.result
+						'name': name, 'src': e.target.result
 					}));
 				}, this);
 				reader.readAsDataURL(file);
