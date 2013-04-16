@@ -96,11 +96,11 @@ body {
 }
 #full-back {
 	left: 10px;
-	background-image: url('img/back-icon.png');
+	background-image: url('/static/img/back-icon.png');
 }
 #full-delete {
 	right: 10px;
-	background-image: url('img/delete-icon.png');
+	background-image: url('/static/img/delete-icon.png');
 }
 
 #full-view img {
