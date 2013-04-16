@@ -1,3 +1,4 @@
+import os.path
 from flask import Flask, request
 import MySQLdb
 import json
@@ -5,8 +6,9 @@ import re
 import base64
 
 DATABASE = 'imgpile'
-UPLOADS_LOCAL = 'static/uploads'
+
 UPLOADS_WEB = '/static/uploads'
+UPLOADS_LOCAL = os.path.dirname(os.path.abspath(__file__)) + UPLOADS_WEB
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -17,6 +19,7 @@ app.debug = True
 def index():
 	return open('static/index.html').read()
 
+# get images collection
 @app.route('/api/images', methods = ['GET', 'POST'])
 def images():
 	db, cursor = connect_db()
@@ -42,7 +45,7 @@ def images():
 	for id, name, extension, description in cursor:
 		images.append({
 			'id': id,
-			'src': '%s/%i.%s' % (app.config['UPLOADS_LOCAL'], id, extension),
+			'src': '%s/%i.%s' % (app.config['UPLOADS_WEB'], id, extension),
 			'name': name,
 			'description': description
 		})
@@ -59,7 +62,7 @@ def image(image_id):
 	id, name, extension, description = cursor.fetchone();
 	image = {
 		'id': id,
-		'src': '%s/%i.%s' % (app.config['UPLOADS_LOCAL'], id, extension),
+		'src': '%s/%i.%s' % (app.config['UPLOADS_WEB'], id, extension),
 		'name': name,
 		'description': description
 	}
